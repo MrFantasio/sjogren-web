@@ -18,7 +18,7 @@ export default async function Home() {
     });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex md:min-h-screen flex-col items-center justify-between">
       <div className="w-full flex flex-col justify-center items-center">
         <Hero heroImage={asset} heroText={heroText as any} />
         {teaserBlocks.items.map((tb, i) => (

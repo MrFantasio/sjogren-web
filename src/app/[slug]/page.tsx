@@ -56,11 +56,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (!pageData) {
     return notFound();
   }
-  console.log(landingPage.body);
   return (
-    <div className="h-full mx-64 flex flex-col m-8 gap-4">
+    <div className="h-full lg:mx-56 flex flex-col m-8 gap-4">
       <h1 className="text-2xl mx-auto">{pageData.fields.title}</h1>
-      {/* <p>{pageData.fields.landingText}</p> */}
       <RichText document={landingPage.body} />
     </div>
   );

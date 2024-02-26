@@ -16,7 +16,7 @@ const TeaserBlock = ({ teaserBlock, index }: TeaserBlockProps) => {
     return (
       <div
         className={
-          "flex w-9/12 gap-8 m-8 p-4 h-80 bg-stone-200" +
+          "hidden md:flex w-9/12 gap-8 m-8 p-4 h-80 bg-stone-200" +
           (index % 2 === 0 ? " flex-row-reverse" : " flex-row")
         }
       >
