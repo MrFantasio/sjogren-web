@@ -9,7 +9,6 @@ function RichText({ document }: RichTextProps) {
   if (!document) {
     return null;
   }
-
   return <>{documentToReactComponents(document)}</>;
 }
 

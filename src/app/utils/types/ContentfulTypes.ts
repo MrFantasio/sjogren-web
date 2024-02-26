@@ -11,7 +11,7 @@ import { Document as RichTextDocument } from "@contentful/rich-text-types";
 export interface TypeLandingPageFields {
   title: string;
   heroBanner: string;
-  landingText?: RichTextDocument | null;
+  landingText?: EntryFieldTypes.RichText;
   landingImage?: Asset | null;
   slug: string;
 }

@@ -1,5 +1,6 @@
 import { createClient } from "contentful";
 import { TypeLandingPageFields, TypeLandingPageSkeleton } from "../types/ContentfulTypes";
+import { LandingPage, parseContentfulLandingPage } from "@/app/contentful/landingPages";
 
 export const contentfulClient = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -11,9 +12,9 @@ export const getImage = async (id: string) => {
   return getImage;
 };
 
-export const getLandingPages = async () => {
+export const fetchLandingPages = async () => {
   const landingPages = await contentfulClient.getEntries<TypeLandingPageSkeleton>({
     content_type: "landingPage",
   });
-  return landingPages;
+  return landingPages.items.map((landingPageEntry) => parseContentfulLandingPage(landingPageEntry) as LandingPage);
 };

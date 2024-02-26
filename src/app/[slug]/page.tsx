@@ -1,11 +1,16 @@
 import { Metadata, ResolvingMetadata } from "next";
 import {
   contentfulClient,
-  getLandingPages,
+  fetchLandingPages,
 } from "../utils/helpers/contentfulClient";
-import { TypeLandingPageSkeleton } from "../utils/types/ContentfulTypes";
+import {
+  TypeLandingPageFields,
+  TypeLandingPageSkeleton,
+} from "../utils/types/ContentfulTypes";
 import { notFound } from "next/navigation";
 import RichText from "../contentful/RichText";
+import { fetchLandingPage } from "../contentful/landingPages";
+import { draftMode } from "next/headers";
 
 interface LandingPageParams {
   slug: string;
@@ -14,8 +19,8 @@ interface LandingPageProps {
   params: LandingPageParams;
 }
 export async function generateStaticParams(): Promise<LandingPageParams[]> {
-  const landingPages = await getLandingPages();
-  return landingPages.items.map((page) => ({ slug: page.fields.slug }));
+  const landingPages = await fetchLandingPages();
+  return landingPages.map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata(
@@ -36,7 +41,11 @@ export async function generateMetadata(
   return { title: pageData.fields.title };
 }
 export default async function Page({ params }: { params: { slug: string } }) {
-  console.log(params.slug);
+  const landingPage = await fetchLandingPage({ slug: params.slug });
+
+  if (!landingPage) {
+    return notFound();
+  }
   const pageData = await contentfulClient
     .getEntries<TypeLandingPageSkeleton>({
       content_type: "landingPage",
@@ -47,11 +56,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (!pageData) {
     return notFound();
   }
+  console.log(landingPage.body);
   return (
     <div className="h-full mx-64 flex flex-col m-8 gap-4">
       <h1 className="text-2xl mx-auto">{pageData.fields.title}</h1>
-      <p>{pageData.fields.landingText}</p>
-      <RichText document={pageData.fields.landingText}/> 
+      {/* <p>{pageData.fields.landingText}</p> */}
+      <RichText document={landingPage.body} />
     </div>
   );
 }
