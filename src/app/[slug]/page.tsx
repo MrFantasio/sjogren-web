@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
+import Image from "next/image";
 import {
   contentfulClient,
   fetchLandingPages,
@@ -57,9 +58,23 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return notFound();
   }
   return (
-    <div className="h-full lg:mx-56 flex flex-col m-8 gap-4">
-      <h1 className="text-2xl mx-auto">{pageData.fields.title}</h1>
-      <RichText document={landingPage.body} />
+    <div className="h-full lg:mx-56 m-8 gap-4">
+      {landingPage.image && (
+        <div>
+          <Image
+            priority
+            alt={landingPage.image?.alt}
+            src={"https:" + landingPage.image?.src}
+            width={500}
+            height={500}
+            className=" float-left"
+          />
+        </div>
+      )}
+      <div className=" text-justify px-4">
+        <h1 className="text-2xl mx-auto">{pageData.fields.title}</h1>
+        <RichText document={landingPage.body} />
+      </div>
     </div>
   );
 }

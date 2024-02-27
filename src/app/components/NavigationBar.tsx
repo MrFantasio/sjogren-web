@@ -23,7 +23,7 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
           <Link href={"/"}>Home</Link>
         </li>
         {landingPages.items.map((lp) => (
-          <li key={lp.sys.id} className="hover:text-black transition-colors">
+          <li key={lp.sys.id} className="active:text-gray-800 hover:text-black transition-colors">
             <Link href={lp.fields.slug}>
               {lp.fields.title as unknown as string}
             </Link>

@@ -21,10 +21,11 @@ export default async function Home() {
     <main className="flex md:min-h-screen flex-col items-center justify-between">
       <div className="w-full flex flex-col justify-center items-center">
         <Hero heroImage={asset} heroText={heroText as any} />
-        {teaserBlocks.items.map((tb, i) => (
-          <TeaserBlock key={tb.sys.id} teaserBlock={tb as any} index={i} />
-        ))}
-        <div></div>
+        <div className="flex flex-col justify-center items-center my-8 text-white">
+          {teaserBlocks.items.map((tb, i) => (
+            <TeaserBlock key={tb.sys.id} teaserBlock={tb as any} index={i} />
+          ))}
+        </div>
       </div>
     </main>
   );
