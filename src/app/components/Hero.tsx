@@ -9,7 +9,7 @@ interface HeroProps {
 
 const Hero = ({ heroImage, heroText }: HeroProps) => {
   return (
-    <div className="flex md:flex-row">
+    <div className="flex md:flex-row relative">
       <Image
         priority
         src={"https:" + heroImage.fields.file!.url}
@@ -18,9 +18,13 @@ const Hero = ({ heroImage, heroText }: HeroProps) => {
         alt={heroImage.fields.description!.toString()}
         className="object-cover flex-grow w-1/2 hidden md:block"
       />
-      <div className=" bg-grayblue text-white flex-grow w-1/2">
+      <div className=" bg-grayblue text-darkblue flex-grow w-1/2 font-notoSans">
         <div className="mt-10 md:mt-36 mx-10 mb-14">
-          <h1 className="text-5xl md:my-4">{heroText.fields.title}</h1>
+          <div className="">
+            <h1 className="text-5xl md:my-4 bg-transparent">
+              {heroText.fields.title}
+            </h1>
+          </div>
           <p className="mt-4">{heroText.fields.textContent}</p>
         </div>
       </div>

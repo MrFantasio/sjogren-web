@@ -14,8 +14,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'grayblue': '#ADBBCE'
-      }
+        'grayblue': '#ADBBCE',
+        'darkblue': '#04092F',
+        'darkorange': '#AB5C07'
+      },
+      fontFamily: {
+        notoSans: ['"Noto Sans"', "sans-serif"],
+        // Add more custom font families as needed
+      },
     },
   },
   plugins: [],

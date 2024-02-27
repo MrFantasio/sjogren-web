@@ -58,23 +58,23 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return notFound();
   }
   return (
-    <div className="h-full lg:mx-56 m-8 gap-4">
+    <main className="h-full lg:mx-48 m-8 gap-4">
+      <h1 className="text-4xl mx-auto">{pageData.fields.title}</h1>
       {landingPage.image && (
-        <div>
+        <div className=" w-fit my-4">
           <Image
             priority
             alt={landingPage.image?.alt}
             src={"https:" + landingPage.image?.src}
             width={500}
             height={500}
-            className=" float-left"
+            className=" float-left mr-4"
           />
         </div>
       )}
-      <div className=" text-justify px-4">
-        <h1 className="text-2xl mx-auto">{pageData.fields.title}</h1>
+      <div className=" text-justify">
         <RichText document={landingPage.body} />
       </div>
-    </div>
+    </main>
   );
 }

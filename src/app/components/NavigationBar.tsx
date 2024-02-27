@@ -5,6 +5,7 @@ import { TypeLandingPageSkeleton } from "../utils/types/ContentfulTypes";
 import { EntryCollection } from "contentful";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface NavigationBarProps {
   landingPages: EntryCollection<TypeLandingPageSkeleton>;
@@ -12,18 +13,37 @@ interface NavigationBarProps {
 
 const NavigationBar = ({ landingPages }: NavigationBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
   };
   return (
     <nav className="p-8 flex flex-row justify-between w-full bg-slate-600">
-      <p className="text-white">Helena Sjögren</p>
+      <Link
+        href={"/"}
+        className={"active:text-gray-800 hover:text-black text-white transition-colors"}
+      >
+        Helena Sjögren
+      </Link>
       <ul className="md:flex flex-row gap-10 text-white hidden">
-        <li className="hover:text-black transition-colors">
+        <li
+          className={
+            "active:text-gray-800 hover:text-black transition-colors" +
+            (pathname === "/" ? " text-amber-500 underline" : "")
+          }
+        >
           <Link href={"/"}>Home</Link>
         </li>
         {landingPages.items.map((lp) => (
-          <li key={lp.sys.id} className="active:text-gray-800 hover:text-black transition-colors">
+          <li
+            key={lp.sys.id}
+            className={
+              "active:text-gray-800 hover:text-black transition-colors" +
+              (pathname === (("/" + lp.fields.slug) as unknown as string)
+                ? " text-amber-500 underline"
+                : "")
+            }
+          >
             <Link href={lp.fields.slug}>
               {lp.fields.title as unknown as string}
             </Link>
