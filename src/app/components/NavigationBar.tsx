@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { TypeLandingPageSkeleton } from "../utils/types/ContentfulTypes";
 import { EntryCollection } from "contentful";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiConsoleController, GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -17,18 +17,16 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <nav className="p-8 flex flex-row justify-between w-full bg-darkblue">
-      <Link
-        href={"/"}
-        className={"active:text-gray-800 hover:text-black text-white transition-colors"}
-      >
+      <Link href={"/"} className={" hover:text-black text-white "}>
         Helena Sjögren
       </Link>
       <ul className="md:flex flex-row gap-10 text-white hidden">
         <li
           className={
-            "active:text-gray-800 hover:text-black transition-colors" +
+            "active:text-gray-800 hover:text-black " +
             (pathname === "/" ? " text-melon underline" : "")
           }
         >
@@ -38,7 +36,7 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
           <li
             key={lp.sys.id}
             className={
-              "active:text-gray-800 hover:text-black transition-colors" +
+              "active:text-gray-800 hover:text-black" +
               (pathname === (("/" + lp.fields.slug) as unknown as string)
                 ? " text-melon underline"
                 : "")
@@ -54,16 +52,48 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
         <GiHamburgerMenu className="md:hidden text-white text-2xl" />
       </button>
       {isOpen && (
-        <div className="md:hidden text-white absolute right-0 top-24 bg-gray-600 p-8 transition-all">
-          <ul className="md:hidden flex flex-col gap-8">
-            {landingPages.items.map((lp) => (
-              <li key={lp.sys.id}>
-                <Link href={lp.fields.slug}>
-                  {lp.fields.title as unknown as string}
-                </Link>
+        <div
+          className=" w-screen h-full top-navHeight absolute z-20 left-0"
+          onClick={handleOpenMenu}
+        >
+          <div
+            className={
+              "md:hidden text-white bg-darkblue p-6 transition-all absolute right-0  z-30 w-1/2 h-full " +" animate-slideInFromRight"
+              // (!isOpen
+              //   ? " animate-slideInFromRight"
+              //   : " animate-slideInFromLeft")
+            }
+          >
+            <ul className="md:hidden flex flex-col gap-8">
+              <li
+                className={
+                  "active:text-gray-800 hover:text-black " +
+                  (pathname === ("/")
+                    ? " text-melon underline"
+                    : "")
+                }
+              >
+                <Link href={"/"}>Home</Link>
               </li>
-            ))}
-          </ul>
+              {landingPages.items.map((lp) => (
+                <li
+                  key={lp.sys.id}
+                  className={
+                    "active:text-gray-800 hover:text-black " +
+                    (pathname === (("/" + lp.fields.slug) as unknown as string)
+                      ? " text-melon underline"
+                      : "")
+                  }
+                >
+                  <button onClick={handleOpenMenu}>
+                    <Link href={lp.fields.slug}>
+                      {lp.fields.title as unknown as string}
+                    </Link>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </nav>

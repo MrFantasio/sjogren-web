@@ -13,27 +13,29 @@ const BigImage = ({ hero }: BigImageProps) => {
           width={1000}
           height={1000}
           alt={hero?.image?.alt as string}
-          className="w-full"
+          className="w-full object-cover h-screen"
         />
       </div>
       <div
         className={
-          "absolute top-10 left-82 " +
+          "absolute top-10 left-82 text-2xl " +
           "md:top-20 md:ml-auto md:mr-auto md:left-48 text-center transition-[opacity, transform] duration-300 animate-slideDown"
         }
       >
-        <h1 className="md:text-2xl text-black text-center font-montsserat">
+        <h1 className=" md:text-2xl text-black text-center font-montsserat">
           <span className="p-4">{hero?.title}</span>
         </h1>
       </div>
-      <div
-        className={
-          "absolute bottom-64 ml-auto mr-auto right-24 w-96 bg-charcoal p-4 text-justify hidden md:block" +
-          "transition-[opacity, transform] duration-300 animate-slideUp"
-        }
-      >
-        <p className="text-melon text-xl">{hero?.text}</p>
-      </div>
+      {hero?.text &&
+        <div
+          className={
+            "absolute top-48 ml-auto mr-auto right-24 w-96 bg-charcoal p-4 text-justify hidden md:block " +
+            "transition-[opacity, transform] duration-300 animate-slideUp"
+          }
+        >
+          <p className="text-white text-xl">{hero.text}</p>
+        </div>
+      }
     </div>
   );
 };
