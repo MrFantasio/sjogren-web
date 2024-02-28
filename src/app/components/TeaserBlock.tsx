@@ -16,7 +16,7 @@ const TeaserBlock = ({ teaserBlock, index }: TeaserBlockProps) => {
     return (
       <div
         className={
-          "hidden md:flex w-9/12 bg-grayblue h-96 text-darkblue" +
+          "hidden md:flex w-9/12 bg-powderBlue h-96 text-charcoal" +
           (index % 2 === 0 ? " flex-row-reverse" : " flex-row")
         }
       >

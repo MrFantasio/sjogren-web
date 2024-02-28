@@ -8,6 +8,7 @@ export interface ContentImage {
 	alt: string
 	width: number
 	height: number
+	id: string
 }
 
 // A function to transform a Contentful image asset
@@ -24,9 +25,10 @@ export function parseContentfulContentImage(
 	}
 
 	return {
-		src: asset.fields.file?.url || '',
+		src: ("https:" +asset.fields.file?.url) || '',
 		alt: asset.fields.description || '',
 		width: asset.fields.file?.details.image?.width || 0,
 		height: asset.fields.file?.details.image?.height || 0,
+		id: asset.sys.id
 	}
 }

@@ -14,14 +14,30 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'grayblue': '#ADBBCE',
-        'darkblue': '#04092F',
-        'darkorange': '#AB5C07'
+        'powderBlue': '#ADBBCE',
+        'charcoal': '#393F4F',
+        'melon': '#D2A69C',
+        'darkblue': '#211C3A'
       },
       fontFamily: {
         notoSans: ['"Noto Sans"', "sans-serif"],
+        montsserat: ['"Montserrat"', "sans-serif"]
         // Add more custom font families as needed
       },
+      keyframes: {
+        slideDown: {
+            '0%': { opacity: '0', transform: 'translateY(-50px)' },
+            '100%': { opacity: '100', toransform: 'translateY(0px)' }
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(50px)' },
+          '100%': { opacity: '100', toransform: 'translateY(0px)' }
+        }
+      },
+      animation: {
+        'slideDown': "slideDown 500ms ease-in-out",
+        'slideUp': "slideUp 500ms ease-in-out",
+      }
     },
   },
   plugins: [],

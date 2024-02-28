@@ -6,7 +6,18 @@ import type {
   LocaleCode,
   Asset,
 } from "contentful";
-import { Document as RichTextDocument } from "@contentful/rich-text-types";
+
+export interface TypeHeroFields {
+  title: EntryFieldTypes.Symbol;
+  heroImage: EntryFieldTypes.AssetLink;
+  welcomeText?: EntryFieldTypes.Text;
+}
+
+export type TypeHeroSkeleton = EntrySkeletonType<TypeHeroFields, "hero">;
+export type TypeHero<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeHeroSkeleton, Modifiers, Locales>;
 
 export interface TypeLandingPageFields {
   title: string;
@@ -24,6 +35,20 @@ export type TypeLandingPage<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode
 > = Entry<TypeLandingPageSkeleton, Modifiers, Locales>;
+
+export interface TypeGalleryFields {
+  galleryImages: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+  title: EntryFieldTypes.Symbol;
+}
+
+export type TypeGallerySkeleton = EntrySkeletonType<
+  TypeGalleryFields,
+  "gallery"
+>;
+export type TypeGallery<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode
+> = Entry<TypeGallerySkeleton, Modifiers, Locales>;
 
 export interface TypeHeroImageFields {
   imageFile: EntryFieldTypes.AssetLink;

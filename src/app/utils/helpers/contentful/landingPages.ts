@@ -1,9 +1,9 @@
-import { Asset, Entry } from "contentful";
+import { Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 
-import { TypeLandingPageSkeleton } from "../utils/types/ContentfulTypes";
+import { TypeLandingPageSkeleton } from "../../types/ContentfulTypes";
 import { ContentImage, parseContentfulContentImage } from "./contentImage";
-import { contentfulClient } from "../utils/helpers/contentfulClient";
+import { contentfulClient } from "../contentfulClient";
 
 type LandingPageEntry = Entry<TypeLandingPageSkeleton, undefined, string>;
 

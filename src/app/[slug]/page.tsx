@@ -8,10 +8,11 @@ import {
   TypeLandingPageFields,
   TypeLandingPageSkeleton,
 } from "../utils/types/ContentfulTypes";
-import { notFound } from "next/navigation";
-import RichText from "../contentful/RichText";
-import { fetchLandingPage } from "../contentful/landingPages";
+import { notFound, usePathname } from "next/navigation";
+import RichText from "../utils/helpers/contentful/RichText";
+import { fetchLandingPage } from "../utils/helpers/contentful/landingPages";
 import { draftMode } from "next/headers";
+import Gallery from "../components/Gallery";
 
 interface LandingPageParams {
   slug: string;
@@ -65,16 +66,19 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <Image
             priority
             alt={landingPage.image?.alt}
-            src={"https:" + landingPage.image?.src}
+            src={landingPage.image?.src}
             width={500}
             height={500}
             className=" float-left mr-4"
           />
         </div>
       )}
-      <div className=" text-justify">
-        <RichText document={landingPage.body} />
-      </div>
+      {landingPage.slug === "ommig" && (
+        <div className=" text-justify">
+          <RichText document={landingPage.body} />
+        </div>
+      )}
+      {landingPage.slug === "sculptures" && <Gallery />}
     </main>
   );
 }

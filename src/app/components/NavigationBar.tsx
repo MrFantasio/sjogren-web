@@ -18,7 +18,7 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
     setIsOpen(!isOpen);
   };
   return (
-    <nav className="p-8 flex flex-row justify-between w-full bg-slate-600">
+    <nav className="p-8 flex flex-row justify-between w-full bg-darkblue">
       <Link
         href={"/"}
         className={"active:text-gray-800 hover:text-black text-white transition-colors"}
@@ -29,7 +29,7 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
         <li
           className={
             "active:text-gray-800 hover:text-black transition-colors" +
-            (pathname === "/" ? " text-amber-500 underline" : "")
+            (pathname === "/" ? " text-melon underline" : "")
           }
         >
           <Link href={"/"}>Home</Link>
@@ -40,7 +40,7 @@ const NavigationBar = ({ landingPages }: NavigationBarProps) => {
             className={
               "active:text-gray-800 hover:text-black transition-colors" +
               (pathname === (("/" + lp.fields.slug) as unknown as string)
-                ? " text-amber-500 underline"
+                ? " text-melon underline"
                 : "")
             }
           >
